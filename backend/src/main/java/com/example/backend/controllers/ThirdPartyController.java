@@ -1,20 +1,19 @@
 package com.example.backend.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.net.httpserver.Request;
-import org.apache.catalina.connector.Response;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.beans.factory.annotation.Value;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
@@ -51,7 +50,7 @@ public class ThirdPartyController {
         // Prepare body
         Map<String, Object> body = new HashMap<>();
         body.put("from", "Job Poster <onboarding@resend.dev>");
-        body.put("to", new String[]{ownerEmail});
+        body.put("to", ownerEmail); // ✅ use string, not array
         body.put("subject", "Customer review - " + request.getUser());
         body.put("html", "<p>" + request.getMessage() + "</p>");
 
