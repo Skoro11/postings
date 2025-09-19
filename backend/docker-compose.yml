@@ -1,0 +1,7 @@
+services:
+  backend:
+    image: demo-app:latest
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
